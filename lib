@@ -1,11 +1,17 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-SET NLIST TO LIST().
-SET NAMES TO LIST().
+@LAZYGLOBAL OFF.
+
+DECLARE LOCAL NLIST IS LIST().
+DECLARE LOCAL NAMES IS LIST().
+DECLARE LOCAL FILENAME IS "".
+DECLARE LOCAL PATH IS "".
+DECLARE LOCAL LCOUNT IS 0.
+DECLARE LOCAL NCOUNT IS 0.
+DECLARE LOCAL MAX IS 0.
+
 PARAMETER NLIST IS "circle_nav,enum,exec,geodec,gui_box,input_string,lazcalc,list_dialog,menu,navball,navigation,num_to_formatted_str,num_to_str,number_dialog,raw_user_input,realchute,running_average_filter,seven_seg,term", FILENAME IS "liblog.ks".
 CD (archive).
-SET LCOUNT TO 0.
-SET NCOUNT TO 0.
 NAMES:ADD("").
 UNTIL LCOUNT = NLIST:LENGTH {
 	IF NLIST[LCOUNT] = "," {
