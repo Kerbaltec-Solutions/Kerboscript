@@ -15,15 +15,14 @@ SET LISTL TO NLIST:LENGTH.
 IF EXISTS(LOGNAME) DELETEPATH(LOGNAME).
 UNTIL NCOUNT = LISTL {
 	CD (library).
-	PRINT NCOUNT.
 	SET PATH TO "lib_" + NLIST[NCOUNT] + ".ks".
 	IF EXISTS(PATH) {
 		RUNPATH(PATH).
 		CD (archive).
-		LOG "PRINT " + CHAR(34) + "did load: " + NLIST[NCOUNT] + "." + CHAR(34) + "." TO LOGNAME.
+		LOG "PRINT " + CHAR(34) + "LOG-" + NCOUNT + ": did load: " + NLIST[NCOUNT] + "." + CHAR(34) + "." TO LOGNAME.
 	} ELSE {
 		CD (archive).
-		LOG "PRINT " + CHAR(34) + "UNABLE TO LOAD: " + NLIST[NCOUNT] + "!" + CHAR(34) + "." TO LOGNAME.
+		LOG "PRINT " + CHAR(34) + "ERR-" + NCOUNT + ": UNABLE TO LOAD: " + NLIST[NCOUNT] + "!" + CHAR(34) + "." TO LOGNAME.
 	}.
 	SET NCOUNT TO NCOUNT + 1.
 }.
