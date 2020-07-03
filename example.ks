@@ -1,3 +1,5 @@
+// This file is distributed under the terms of the MIT license, (c) Björn Kerman
+
 clearscreen.
 run lib. //runs lib without any arguments, thus trying to load every known library and saving the log to "liblog.ks"
 run lib("navball,gui_box,does_not_exist","examplelog.ks"). //runs lib with arguments, only trying to load "lib_navball.ks", "lib_gui_box.ks" and "lib_does_not_exist.ks" (the last one will cause an error wich is handeled) and saving the log to "examplelog.ks"
