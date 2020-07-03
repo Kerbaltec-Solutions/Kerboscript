@@ -1,42 +1,28 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// This file is distributed under the terms of the MIT license, (c) Björn Kerman
 
 @LAZYGLOBAL OFF.
 
 DECLARE LOCAL NLIST IS LIST().
-DECLARE LOCAL NAMES IS LIST().
-DECLARE LOCAL FILENAME IS "".
+DECLARE LOCAL LOGNAME IS "".
 DECLARE LOCAL PATH IS "".
-DECLARE LOCAL LCOUNT IS 0.
 DECLARE LOCAL NCOUNT IS 0.
-DECLARE LOCAL MAX IS 0.
+DECLARE LOCAL LISTL IS 0.
 
-PARAMETER NLIST IS "circle_nav,enum,exec,geodec,gui_box,input_string,lazcalc,list_dialog,menu,navball,navigation,num_to_formatted_str,num_to_str,number_dialog,raw_user_input,realchute,running_average_filter,seven_seg,term", FILENAME IS "liblog.ks".
+PARAMETER NLIST IS "circle_nav,enum,exec,geodec,gui_box,input_string,lazcalc,list_dialog,menu,navball,navigation,num_to_formatted_str,num_to_str,number_dialog,raw_user_input,realchute,running_average_filter,seven_seg,term", LOGNAME IS "liblog.ks".
 CD (archive).
-NAMES:ADD("").
-UNTIL LCOUNT = NLIST:LENGTH {
-	IF NLIST[LCOUNT] = "," {
-		NAMES:ADD("").
-		SET LCOUNT TO LCOUNT + 1.
-		SET NCOUNT TO NCOUNT + 1.
-	} ELSE {
-		SET NAMES[NCOUNT] TO NAMES[NCOUNT] + NLIST[LCOUNT].
-		SET LCOUNT TO LCOUNT + 1.
-	}.
-}.
-SET MAX TO NCOUNT.
-SET LCOUNT TO 0.
-SET NCOUNT TO 0.
-IF EXISTS(FILENAME) DELETEPATH(FILENAME).
-UNTIL NCOUNT - 1 = MAX {
+SET NLIST TO NLIST:SPLIT(",").
+SET LISTL TO NLIST:LENGTH.
+IF EXISTS(LOGNAME) DELETEPATH(LOGNAME).
+UNTIL NCOUNT - 1 = LISTL {
 	CD (library).
-	SET PATH TO "lib_" + NAMES[NCOUNT] + ".ks".
+	SET PATH TO "lib_" + NLIST[NCOUNT] + ".ks".
 	IF EXISTS(PATH) {
 		RUNPATH(PATH).
 		CD (archive).
-		LOG "PRINT " + CHAR(34) + "did load: " + NAMES[NCOUNT] + "." + CHAR(34) + "." TO FILENAME.
+		LOG "PRINT " + CHAR(34) + "did load: " + NLIST[NCOUNT] + "." + CHAR(34) + "." TO LOGNAME.
 	} ELSE {
 		CD (archive).
-		LOG "PRINT " + CHAR(34) + "UNABLE TO LOAD: " + NAMES[NCOUNT] + "!" + CHAR(34) + "." TO FILENAME.
+		LOG "PRINT " + CHAR(34) + "UNABLE TO LOAD: " + NLIST[NCOUNT] + "!" + CHAR(34) + "." TO LOGNAME.
 	}.
 	SET NCOUNT TO NCOUNT + 1.
 }.
