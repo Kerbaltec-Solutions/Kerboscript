@@ -1,0 +1,22 @@
+// This file is distributed under the terms of the MIT license, (c) Björn Kerman
+
+@LAZYGLOBAL OFF.
+
+DECLARE LOCAL logname IS LIST().
+DECLARE LOCAL lilegth IS 0.
+DECLARE LOCAL licount IS 0.
+
+PARAMETER logname IS "liblog.txt".
+CD (archive).
+SET logname TO logname:SPLIT(",").
+SET lilegth TO logname:LENGTH.
+UNTIL licount = lilegth { 
+	IF EXISTS(logname[licount]) {
+		PRINT OPEN(logname[licount]):READALL:STRING.
+	} ELSE {
+		PRINT "ERR: LOG DOES NOT EXIST!".
+	}.
+	PRINT " ".
+	SET licount TO licount + 1.
+}.
+WAIT 5.

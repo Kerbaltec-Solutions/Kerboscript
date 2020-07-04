@@ -8,7 +8,7 @@ DECLARE LOCAL PATH IS "".
 DECLARE LOCAL NCOUNT IS 0.
 DECLARE LOCAL LISTL IS 0.
 
-PARAMETER NLIST IS "circle_nav,enum,exec,geodec,gui_box,input_string,lazcalc,list_dialog,menu,navball,navigation,num_to_formatted_str,num_to_str,number_dialog,raw_user_input,realchute,running_average_filter,seven_seg,term", LOGNAME IS "liblog.ks".
+PARAMETER NLIST IS "circle_nav,enum,exec,geodec,gui_box,input_string,lazcalc,list_dialog,menu,navball,navigation,num_to_formatted_str,num_to_str,number_dialog,raw_user_input,realchute,running_average_filter,seven_seg,term", LOGNAME IS "liblog.txt".
 CD (archive).
 SET NLIST TO NLIST:SPLIT(",").
 SET LISTL TO NLIST:LENGTH.
@@ -19,10 +19,10 @@ UNTIL NCOUNT = LISTL {
 	IF EXISTS(PATH) {
 		RUNPATH(PATH).
 		CD (archive).
-		LOG "PRINT " + CHAR(34) + "LOG-" + NCOUNT + ": did load: " + NLIST[NCOUNT] + "." + CHAR(34) + "." TO LOGNAME.
+		LOG "LOG-" + NCOUNT + ": did load: " + NLIST[NCOUNT] + "." TO LOGNAME.
 	} ELSE {
 		CD (archive).
-		LOG "PRINT " + CHAR(34) + "ERR-" + NCOUNT + ": UNABLE TO LOAD: " + NLIST[NCOUNT] + "!" + CHAR(34) + "." TO LOGNAME.
+		LOG "ERR-" + NCOUNT + ": UNABLE TO LOAD: " + NLIST[NCOUNT] + "!" TO LOGNAME.
 	}.
 	SET NCOUNT TO NCOUNT + 1.
 }.
